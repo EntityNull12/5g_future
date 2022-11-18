@@ -18,6 +18,7 @@ body{
     padding: 0;
     margin: 0;
     position: relative;
+    overflow-x: hidden;
 }
 main{
     margin-top: 0px;
@@ -26,35 +27,96 @@ nav{
     position: sticky;
     z-index: 99;
     display: flex;
-    width: 100%;
     background: rgba(255,255,255,0.1);
+    justify-content: space-around;
+    align-items: center;
     
+}
+
+.brand svg{
+    width: 50px;
+    height: 50px;
 }
 
 .navs{
     display: flex;
     align-items: center;
-    justify-content: right;
+    list-style: none;
+    width: 30%;
+    justify-content: space-between;
+    transition: all 0.7s;
 }
 
-.navs li a{
-    justify-content: center;
+.navs.slide{
+    transform: translateX(0);
 }
-
-
 
 nav li{
-    display: inline;
-    float: right;
+ 
+    margin: 10px;
     
 }
 nav li a{
     text-decoration: none;
-    color: #fff;
-    padding: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 3px;
+    font-size: 0.8em;
+   
 }
-.brand{
-    width:53%;
+
+nav li a:hover{
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.menu-toggle{
+    display: flex;
+    flex-direction: column;
+    height: 20px;
+    justify-content: space-between;
+    position: relative;
+    display: none;
+}
+
+.menu-toggle input{
+    position: absolute;
+    width: 40px;
+    height: 28px;
+    top: -5px;
+    left: -10px;
+    opacity: 0;
+    z-index: 2;
+    cursor: pointer;
+    
+}
+
+.menu-toggle span{
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 3px;
+    transition: all 0.5s;
+}
+
+.menu-toggle span:nth-child(2){
+    transform-origin: 0 0;
+}
+
+.menu-toggle input:checked ~ span:nth-child(2){
+    transform: rotate(45deg) translate(-1px, -1px);
+}
+
+.menu-toggle span:nth-child(4){
+    transform-origin: 0 100%;
+}
+
+.menu-toggle input:checked ~ span:nth-child(4){
+    transform: rotate(-45deg) translate(-1px, 0);
+}
+
+.menu-toggle input:checked ~ span:nth-child(3){
+    scale: 0;
+    opacity: 0;
 }
 
 
@@ -62,7 +124,61 @@ nav li a{
 #background{
     background-image: url(./src/img/beranda/global-connections.jpg);
     height: 100vh;
+    width: 100%;
     background-repeat: no-repeat;
-    background-position: center;
-    
+    background-size: cover;
+    background-position: 100%;
+}
+
+/* responsive tablet */
+
+@media screen and (max-width:1070px) {
+    nav .navs{
+        width: 50%;
+    }
+
+    #background{
+        background-position: 50%;
+    }
+}
+
+@media screen and (max-width:880px) {
+    nav .navs{
+        width: 65%;
+    }
+}
+
+/* responsive mobile */
+
+@media screen and (max-width:576px) {
+    nav .navs{
+        position: absolute;
+        flex-direction: column;
+        right: 0;
+        top: 40px;
+        width: 70%;
+        box-shadow: 2px #fff;
+        background-color: rgba(255,255,255,0.3);
+        height: 50vh;
+        align-items: baseline;
+        justify-content: space-evenly;
+        z-index: -1;
+        transform: translatex(100%);
+        border-bottom-left-radius: 10px;
+    }
+
+    .navs li{
+        border: 2px #fff;
+    }
+
+    .navs li a{
+        font-size:1em;
+    }
+    nav .menu-toggle{
+        display: flex;
+    }
+
+    #background{
+        background-position: 55%;
+    }
 }
